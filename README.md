@@ -12,7 +12,7 @@
 
 3. [Powershell Language Reference](http://www.satyakomatineni.com/akc/display?url=DisplayNoteIMPURL&reportId=5568&ownerUserId=satya)
 
-4. [Powershell Resources] (http://www.satyakomatineni.com/akc/display?url=DisplayNoteIMPURL&reportId=5570&ownerUserId=satya)
+4. [Powershell Resources](http://www.satyakomatineni.com/akc/display?url=DisplayNoteIMPURL&reportId=5570&ownerUserId=satya)
 
 5. [Powershell Coding Journal. My notes on working with powershell](http://www.satyakomatineni.com/akc/display?url=DisplayNoteIMPURL&reportId=5584&ownerUserId=satya)
 
