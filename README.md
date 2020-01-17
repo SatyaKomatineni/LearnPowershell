@@ -16,4 +16,4 @@
 
 5. [Powershell Coding Journal. My notes on working with powershell](http://www.satyakomatineni.com/akc/display?url=DisplayNoteIMPURL&reportId=5584&ownerUserId=satya). As I write more scripts new findings are appended here.
 
-6. [Powershell basics: install, videos, startup journal on this topic](http://www.satyakomatineni.com/akc/display?url=DisplayNoteIMPURL&reportId=5561&ownerUserId=satya)
+6. [Powershell basics: install, videos, startup journal on this topic](http://www.satyakomatineni.com/akc/display?url=DisplayNoteIMPURL&reportId=5561&ownerUserId=satya). I usually start my learning any new topic with a knowledge mining document at this site. This is that starting document. This is the path I followed in learning this topic. This is a mixture of various searches, findings, summaries, references, links, and the rest of the documents would have spawned from here.
