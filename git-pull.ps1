@@ -1,12 +1,26 @@
 # Primary Goal
 # ********************************************************
 # Write a powershell script to clone and pull
-# a private git repo using azure cloud shell
+# a private git repo.
+
+# Can be used in an azure cloud shell
 # into a cloud shell mounted drive in the azure cloud
+#
+# can be used anywhere to copy code for deployments
+# where the transfer mechanism is a git repo
+# Uses an access token from Github or git repo
 #
 # Secondary Goal
 # ************************
 # Exercise basic first time powershell write
+#
+# Prerequisites
+# ******************
+# 1. there is an access token
+# 2. Change the configuration section to set 
+#    a) loal repo directories
+#    b) remote repo URLs
+#
 #
 # Caution
 # ************************
@@ -63,6 +77,20 @@
 # ********************************************************
 # Configuration
 # ********************************************************
+
+#
+#1. Configure this section correctly
+#2. Rename the utility to your prefered name
+#3. Set that in a path
+#Set this to $true 
+#
+
+#$configured = $true
+$configured=$false
+
+# Real configuration follow
+# ************************************
+
 # $accessToken This will be read from the environment
 # Look for this in the environment
 $repoAccessTokenName = "GitRepoPowershell_AccessToken"
@@ -75,8 +103,9 @@ $scriptsDir = "C:\satya\data\code\power-shell-scripts\individual\satya\git-util"
 
 #This is the URI of the private repo
 function getRepoUri($accessToken){
-    return "https://$accessToken@gitlab.com/kreate-redfx/power-shell-scripts"
+    return "https://$accessToken@gitlab.com/rest-of-repo-url"
 }
+
 
 # ********************************************************
 # End Configuration
@@ -201,6 +230,11 @@ function pull {
 
 function main {
 
+    if ($configured -eq $false)
+    {
+        Write-Host "You need to configure this first. Read the comments section"
+        return
+    }
     $cmdset1 = "reset, show, set, gitlocal, scripts"
     $cmdset2 = "clone,pull,otherwise"
     $what = Read-Host -Prompt "What command: $cmdset1,$cmdset2"
