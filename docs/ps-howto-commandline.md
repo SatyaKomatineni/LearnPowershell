@@ -6,7 +6,7 @@
     Started: 6/15/24
     Goal: Use command line powershell on windows computers
 
-## Introduction
+# Introduction
 With MS Windows PowerShell (often just called "PS" ) you can do the following
 
 ### As a shell
@@ -41,7 +41,7 @@ Among other things you will learn
     4. A list of very useful commands (like dir, cp, mv, ls, etc.)
     5. Note, most windows OS is exposed as a set of commands and ripe for automation
 
-## what are some essential elements of PS
+# What are some essential elements of PS
 The following are the essential elements of PS. Good to point out what these are.
 
 ### Comands
@@ -69,7 +69,7 @@ The following are the essential elements of PS. Good to point out what these are
 4. Supports SQL like commands to slice and dice a collection of these objects
 
 <!-- ********************************************* -->
-## Getting Started
+# Getting Started
 <!-- ********************************************* -->
 To start using PowerShell, few of the ways are below.
 
@@ -145,8 +145,54 @@ Best thing to do is to
 
 A bit of caution though: I haven't installed myself. Do not know the compatibility on home and non-server editions. I have no reason to doubt it won't work, still read up first and choose.
 
+<!-- ********************* -->
+# Few early useful meta commands
+<!-- ********************* -->
+
+```powershell
+exit # exits the powershell
+powershell # starts powershell from a dos prompt in the same session
+start powershell # in a new shell
+cls, clear # clears the session window
+ctrl-c # To stop a running process
+
+#Power of tab, cycle through options on command line
+Get- (then press) tab #you can cycle through command starting with get
+get-command - (press tab) #shows options for get-command
+
+get-computerinfo #info about your computer
+
+get-command # lists all commands from all modules
+get-command *co* # lists all commands using a wild card selection
+
+get-alias # listts all aliases for commonly used commands
+get-alias *ca* # lists all aliases using wild cards
+
+# get-help common ones
+get-help clear-host #lists documentation for clear
+get-help clear -examples # with examples on commandline
+get-help clear -online # kicks of a web browser (recommended)
+
+# get-help interesting ones
+get-help abc # lists all comamnds that has "abc" in them, or in their docs
+get-help *abc* # same as abc
+get-help about #lists all conceptual articles on powershell (like a language reference)
+dir -? # same as get-help dir
+
+get-module # list all (or wildcarded) (installed) modules
+get-module -ListAvailable
+
+find-module # list all (or wildcarded) modules in exernal gallery sources
+#This may take a minute
+#wild cards are necessary if that is intended
+
+get-help install-module -online
+#will take you to the online description of install-module
+#Once the module is installed, you 
+```
+
 <!-- ********************************************* -->
-## Exploring dir command
+# Exploring dir command
 <!-- ********************************************* -->
 Lets jump into some commands.
 
