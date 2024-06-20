@@ -179,8 +179,9 @@ get-help *abc* # same as abc
 get-help about #lists all conceptual articles on powershell (like a language reference)
 dir -? # same as get-help dir
 
-get-module # list all (or wildcarded) (installed) modules
-get-module -ListAvailable
+get-module # list all (or wildcarded) (imported) modules
+get-module -ListAvailable # show all installed modules (in addition to imported)
+get-help import-module -online # To import modules from the installed set
 
 find-module # list all (or wildcarded) modules in exernal gallery sources
 #This may take a minute
@@ -204,6 +205,16 @@ dir *.*
 
 # equivalent to dir /s *.ppt
 dir -Recurse *.ppt
+
+#Shows the attributes of a directory object
+dir abc-directory | get-member
+
+#Shows the attributes of a file object
+dir some-existing-file | get-member
+
+# Print only the attributes you want
+dir some-files | select - property fullname
+
 ```
 
 ### Discover all the options for "dir"
@@ -387,6 +398,24 @@ C:\satya\data\code\articles-repo\guide-to-analysts.docx
 C:\satya\data\code\articles-repo\Language Critique.docx
 C:\satya\data\code\articles-repo\on-closures.docx
 C:\satya\data\code\articles-repo\transactional-reporting-options.docx
+```
+
+<!-- ********************* -->
+# Exploring cat
+<!-- ********************* -->
+
+The command `cat` is an alias for `get-content` commmandlet.
+
+```powershell
+cat a.txt #display the contents
+cat a.txt -TotalCount 5 # show top 5 lines
+cat a.txt -Tail 5 # show the last 5 lines
+
+cat a.txt -Raw #Return as a stream
+
+cat a.txt -Encoding Byte -Raw # as a byte stream
+
+get-help cat -online #Readup docs online as it has a number of other nuances
 ```
 
 
