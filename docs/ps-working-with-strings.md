@@ -387,3 +387,6 @@ These methods make it easy to build, transform, and query strings directly from 
 8. [PowerShell Quoting Rules](https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-quoting)  
    Explanation of single vs double quotes, escape sequences, and raw string literals.
 
+9. [Working with strings, Cheat sheet](https://github.com/SatyaKomatineni/LearnPowershell/blob/master/docs/ps-strings-cheat-sheet.md)
+    Strings cheat sheet.
+

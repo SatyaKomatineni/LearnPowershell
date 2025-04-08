@@ -87,4 +87,4 @@ No escapes. $verbatim.
 This cheat sheet condenses common string operations, formatting tricks, and method references for quick use in scripts and pipelines.
 
 ### Reference
-[Working with strings, an elaborate sister article](https://tbd)
+[Working with strings, an elaborate sister article](https://github.com/SatyaKomatineni/LearnPowershell/blob/master/docs/ps-working-with-strings.md)
