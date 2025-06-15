@@ -1,0 +1,35 @@
+# Spec to create a git create repo
+
+Goal
+**********************
+1. Create a new repo based on the current directory 
+2. Provide checks that I am not making a mistake inadvetently
+3. Use defensive coding :)
+4. Allow me to extend it for other github scripts in the future if that is easy to do.
+
+Initiali checks
+************************
+1. Make sure the cuurent directory ends in a name ..repo, if it is not point that out and exit
+2. That it is not a repo already, if it is point that out and exit
+3. Prompt that you are going to create a repo based on the current directory
+
+
+Input paramenters
+**********************
+1. Use the current directoy 
+2. Take the first commit message as input
+
+Run behavior
+****************************
+accept 2 options -help, -Run, -mimic, -list
+
+-help explain what it does and what the input args are
+-mimic list the  input options with which you are going to execute
+-Run list the  input options with which you are going to execute and ask for a permission to move forward and if yes execute, if no return
+-list after indicating the input parameters used, just list the git commands that you are going to execute but return after the listing
+
+How to write the code
+**************************
+1. Make it really modular by abstracting these activities into various functions
+2. Especially the final function that executes all of the git commands
+3. And each option -help, -run, -mimic, -run encapsulated into their respective functions

@@ -20,7 +20,8 @@
 # EnvUtils.getEnvVariable, getEnvVariableWithDefault
 # TimeUtils.convertToISOTime, convertToISOTime2, getDateForISOString
 # TimeUtils.getMinutePortion, getMinutePortion1, testISODate
-# ErrorUtils.getANewErrorArray, testErrorArray
+# ErrorUtils.getANewErrorArray, testErrorArray, getExceptionMessage, printErrorRecordDetails
+#
 #**********************************************
 #>
 function IsNull([object]$value) {
@@ -94,7 +95,7 @@ function mhp($message)
 }
 
 
-function getExceptionMessage($errorRecord)
+function ErrorUtils.getExceptionMessage($errorRecord)
 {
     if (isNull $errorRecord)
     {
@@ -123,7 +124,7 @@ function getExceptionMessage($errorRecord)
     #base exception doesn't exist
     return $er.Exception.Message
 }
-function printErrorRecordDetails($errorRecord)
+function ErrorUtils.printErrorRecordDetails($errorRecord)
 {
     if ($errorRecord -eq $null)
     {
@@ -169,7 +170,7 @@ function printErrorRecordDetails($errorRecord)
  # It is useful to know what are the types of 
  # variables in powershell scripts
  # **********************************************
- function printTypeInformation ($inputobject)
+ function TypeUtils.printTypeInformation ($inputobject)
  {
      Write-Host "printing type information for type: $($inputobject.GetType())"
      $typeDetails = $inputobject  | Get-Member
@@ -177,10 +178,9 @@ function printErrorRecordDetails($errorRecord)
      $inputObject.GetType()
  }
 
- function printSimpleTypeInfo($inputObject)
+ function TypeUtils.printSimpleTypeInfo($inputObject)
  {
-    if ($inputObject -eq $null)
-    {
+    if (isNull $inputObject) {
         p -message "The input object you passed is null."
         return
     }
@@ -193,26 +193,17 @@ function printErrorRecordDetails($errorRecord)
     $typeObject
  }
 
- function getTypeFullname($inputObject)
+ function TypeUtils.getTypeFullname($inputObject)
  {
-    if ($inputObject -eq $null)
+    if (isNull $inputObject)
     {
         p -message "The input object you passed is null."
         return $null
     }
     return $inputObject.GetType().FullName
  }
-function getCredentials($plainUserid, $plainPassword)
-{
-
-    $password = ConvertTo-SecureString $passwordPlain -AsPlainText -Force
-
-    $credential = New-Object `
-            System.Management.Automation.PSCredential(`
-                $plaingUserid,`
-                $plainPassword)
-
-    return $credential
+function vutils.isNotValid($somestring) {
+    return !(vutils.isValid($somestring))
 }
 
 function vutils.isValid($somestring)
@@ -280,7 +271,7 @@ function TimeUtils.convertToISOTime($datetime)
 
 function TimeUtils.convertToISOTime2($datetime)
  {
-     if ($datetime -eq $null)
+     if (isnull $datetime)
      {
          throw "Date time cannot null: from convertToISOTime2"
      }
@@ -388,6 +379,12 @@ function TypeUtils.testSimpleTypeInfo()
     $s = "hello"
     printSimpleTypeInfo -inputObject $s
 }
+
+<#
+#*************************************************
+# FileUtils section
+#*************************************************
+#>
 function FileUtils.countFiles($fileList)
 {
     if ($fileList -eq $null)
@@ -433,6 +430,85 @@ function FileUtils.moveFile($fullFilename, $toDir)
     }
     return Move-Item -path $fullFilename -Destination $toDir -Force
 }
+function FileUtils.changeDirectory($toDir)
+{
+    Set-Location -Path $toDir
+}
+
+# ***********************************************
+# Returns full path if the file exists, otherwise returns $null
+# ***********************************************
+function FileUtils.resolveIfExists($FileName) 
+{
+    $resolved = Resolve-Path -Path $FileName -ErrorAction SilentlyContinue
+    if ($resolved) {
+        return $resolved.ProviderPath
+    } else {
+        return $null
+    }
+}
+
+# Examples:
+# FileUtils.resolveIfExists "data.txt"                # -> C:\Path\To\data.txt
+# FileUtils.resolveIfExists ".\logs\latest.log"       # -> C:\Path\To\logs\latest.log
+# FileUtils.resolveIfExists "..\shared\config.json"   # -> C:\Path\shared\config.json
+# FileUtils.resolveIfExists "ghost.txt"               # -> $null
+# FileUtils.resolveIfExists "C:\Temp\missing.log"     # -> $null
+# FileUtils.resolveIfExists "C:\Users\Me\readme.md"   # -> C:\Users\Me\readme.md
+
+function FileUtils.pickFileFromCWD($Filter = "*")
+{
+    # Get filtered files in the current directory
+    $files = Get-ChildItem -File -Filter $Filter
+
+    if (-not $files)
+    {
+        Write-Host "No files found matching filter '$Filter' in the current directory."
+        return $null
+    }
+
+    # Display numbered list
+    for ($i = 0; $i -lt $files.Count; $i++)
+    {
+        Write-Host "[$i] $($files[$i].Name)"
+    }
+
+    # Add exit option
+    $exitIndex = $files.Count
+    Write-Host "[$exitIndex] Exit without selecting"
+
+    # Prompt for selection
+    $selection = Read-Host "Enter the number of the file to select"
+
+    # Validate input: only digits allowed (non-negative integer)
+    if ($selection -notmatch '^\d+$')
+    {
+        Write-Host "Invalid selection."
+        return $null
+    }
+
+    $index = [int]$selection
+
+    if ($index -ge 0 -and $index -lt $files.Count)
+    {
+        return $files[$index].FullName
+    }
+
+    if ($index -eq $exitIndex)
+    {
+        Write-Host "No file selected."
+        return $null
+    }
+
+    Write-Host "Invalid selection."
+    return $null
+}
+
+<#
+#*************************************************
+# End FileUtils section
+#*************************************************
+#>
 
 function TimeUtils.testGetDate()
 {
@@ -442,11 +518,11 @@ function TimeUtils.testGetDate()
 
 }
 
-function FileUtils.changeDirectory($toDir)
-{
-    Set-Location -Path $toDir
-}
-
+<#
+#*************************************************
+# StringUtils section
+#*************************************************
+#>
 
 function StringUtils.escapeSingleQuotes($s)
 {
@@ -464,6 +540,11 @@ function StringUtils.testEscapeSingleQuotes()
 
 }
 
+<#
+#*************************************************
+# End StringUtils section
+#*************************************************
+#>
 
 function testPsutils()
 {
@@ -482,12 +563,12 @@ function testPsutils()
     #testIsValid
 }
 
- # **********************************************
- # Initialization
- # **********************************************
+# **********************************************
+# Initialization
+# **********************************************
 function initPSUtils()
 {
-    pe -message "Initializing PSUtils"
+    p -message "Initializing PSUtils successfully, one time only"
 }
 
 # **********************************************
@@ -495,6 +576,12 @@ function initPSUtils()
 # **********************************************
 
 initPSUtils
+
+#**********************************************
+# Do not delete this
+# **********************************************
+#Do not delete the following line
+$psutilsIncluded = $true
 
 # **********************************************
 # End block: Do not delete this

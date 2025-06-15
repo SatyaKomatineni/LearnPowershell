@@ -1,0 +1,42 @@
+# Spec to associate a directory to a matching empty repo
+
+Goal
+**********************
+1. Associate a directory to a matching empty repo
+2. Provide checks that I am not making a mistake inadvetently
+3. Use defensive coding :)
+4. Allow me to extend it for other github scripts in the future if that is easy to do.
+
+Initiali checks
+************************
+1. Make sure the cuurent directory ends in a name ..repo, if it is not point that out and exit
+2. That it is not a repo already, if it is point that out by naming its remote repo and exit
+3. Prompt that you are going to associate this repo with the remote repo
+4. Check that a remote repo exists with this name derived from the current directory
+
+
+Input paramenters
+**********************
+1. Use the current directoy as the directory to associate to the remote repo
+
+Run behavior
+****************************
+accept 2 options -help, -Run, -mimic, -list
+
+-help explain what it does and what the input args are
+-mimic list the  input options with which you are going to execute
+-Run list the  input options with which you are going to execute and ask for a permission to move forward and if yes execute, if no return
+-list after indicating the input parameters used, just list the git commands that you are going to execute but return after the listing
+
+Git related expectations
+******************************
+1. Names of the local repo and remote repo matches
+2. there is no .git in the local repo
+3. Just do a git init and associate the current directory with an empty repo on server
+
+How to write the code
+**************************
+1. Make it really modular by abstracting these activities into various functions
+2. Especially the final function that executes all of the git commands
+3. And each option -help, -run, -mimic, -run encapsulated into their respective functions
+4. Encapsulate all in a main method that is executed in the end
