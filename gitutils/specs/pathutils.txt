@@ -1,0 +1,61 @@
+# Name: pathutils.ps1
+# work with windows environment path variables
+
+
+Goal
+**********************
+1. work with windows environment path variables
+2. list system and user environment variables
+2. Allow me to update user and system environment path variable
+2. Provide checks that I am not making a mistake inadvertently
+2. Use numbered prompts to execute commands
+3. Use defensive coding :)
+
+
+Initiali checks
+************************
+1. None
+
+Input paramenters
+**********************
+1. None
+
+Run behavior
+****************************
+1. Provide the following functions
+2. List all these functions in a numbered list for user to pick the function number to execute
+2. help - to display help how this program works and what it can do and show the each function as a menu item
+3. show system paths - show system paths on multiple lines one per path, order them based on their parent directories
+4. show user paths - show user paths on multiple lines one per path, order them based on their parent directories
+5. update system path - see instructions on how to code it and what the inputs are
+6. update user path - see instructions on how to code it and what the inputs are
+7. update the current path - see instructions on how to code it and what the inputs are
+7. show total paths for the current environment - on multiple lines for readability
+7. exit - exit the script
+7. after executing each function show the menu again until exit function is chosen
+
+
+Instructions for update user path
+************************************
+1. Prompt the user for a path
+2. Prompt the current directory as a default for that selection
+3. if the directory is already in the path (system or user) indicate that and exit the function (not the program)
+3. Prompt the user that you are going to append the specified user path 
+5. if the answer is Y or yes change the user path
+6. On success Indicate that the user path has changed
+7. Call the show user paths function to list the user paths
+
+Instructions for update system path
+************************************
+Follow the same rules as the user path function but apply that to the system path instead
+
+Instructions for update current path
+************************************
+Do the same as the user path, but just change the current env path in the current session
+
+How to write the code
+**************************
+1. Make it really modular by abstracting these activities into various functions
+2. Encapsulate all in a main method that is executed in the end
+3. Use a menu pattern
+4. If possible use the braces {} on separate lines

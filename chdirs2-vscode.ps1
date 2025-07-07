@@ -46,6 +46,8 @@
         home = 'c:\satya\data\code'
         pslearn = 'C:\satya\data\code\LearnPowershellRepo'
         vsworkspaces = "C:\satya\data\code\vs-workspaces"
+        aiux = "C:\satya\data\code\assistant-ui-testrepo"
+        mcpservers = "C:\satya\data\code\mcp-servers-testrepo"
         test_func=createTestFunc
         vscode=createVSCodeCommand
     }
