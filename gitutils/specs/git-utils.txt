@@ -1,0 +1,45 @@
+# Spec to prompt useful git commands and execute them as a set of functions
+
+Goal
+**********************
+1. Create a set of useful git utilities each as a function
+2. Prompt the user functions available
+3. Prompted function names should have a brief description after their name
+4. Allow me to extend it for other github scripts in the future if that is easy to do.
+
+Name of the ps file
+*************************
+git-utils.ps1
+
+Initiali checks
+************************
+None yet
+
+Input paramenters
+**********************
+None yet
+
+Run behavior
+****************************
+- List functions and their brief descriptions
+- Each function has a user friendly name, user friendly description, actual function
+- use exit as one of the options and exit the program
+- if a function is chosen execute the function and display its results and exit
+
+Git related expectations
+******************************
+None yet
+
+How to write the code
+**************************
+1. Make it really modular by abstracting these activities into various functions
+2. Especially the final function that executes all of the git commands
+3. Encapsulate all in a main method that is executed in the end
+4. Allow to add more functions in the future
+5. use object oriented way to define functions with an execute method that calls if necessary get inputs, validations, and final execution
+
+Initial functions
+****************************
+1. One that displays git status in a git repo dir
+2. show all remotes 
+3. show remote origin details via git remote origin

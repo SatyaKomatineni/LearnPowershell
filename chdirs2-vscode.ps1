@@ -3,6 +3,12 @@
  # List and change directories on a command line
  # Also execute commands via functions
  #
+ # Version 3
+ # *******************************************************
+ # Based on the same file as version 2
+ # added Who Am I command
+ # Added a google drive directory
+ 
  # version 2 (vscode variant)
  # ***************
  # This file: /learn-power-shell/chdirs2-vscode.ps1
@@ -48,6 +54,8 @@
         vsworkspaces = "C:\satya\data\code\vs-workspaces"
         aiux = "C:\satya\data\code\assistant-ui-testrepo"
         mcpservers = "C:\satya\data\code\mcp-servers-testrepo"
+        rulesOfEngagement = "G:\My Drive\2019\private\rules-of-engagement\satya-key-notes"
+        whoAmI = createWhoAmICommand
         test_func=createTestFunc
         vscode=createVSCodeCommand
     }
@@ -70,6 +78,9 @@ function createVSCodeCommand
      code $vscodeWS
  }
  
+#*******************************************************
+# Test functions
+#*******************************************************
  function createTestFunc
  {
      $cmd = createNewCommand -name "Test Func"  -functionName "invokeTestFunc"
@@ -79,7 +90,21 @@ function createVSCodeCommand
  {
      p -message "Invoking test func"
  }
-
+#*******************************************************
+# Who Am I Command/Function
+#*******************************************************
+function createWhoAmICommand
+ {
+     $cmd = createNewCommand -name "Who Am I"  -functionName "whoAmI"
+     $cmd.desc = "Display the name of this file when it is executing, the full path"
+     return $cmd
+ }
+ 
+ function whoAmI()
+{
+    # Display the name of this file when it is executing, the full path
+    $script:MyInvocation.MyCommand.Path
+}
 #*******************************************************
 # Config Functions
 #*******************************************************
